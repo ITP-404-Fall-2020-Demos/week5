@@ -9,8 +9,8 @@ export default function IssueForm({ labels, onSubmit }) {
 
     onSubmit(title, labelId);
 
-    setTitle("");
-    setLabelId(2);
+    // setTitle("");
+    // setLabelId(2);
   }
 
   function handleTitleChange(event) {
