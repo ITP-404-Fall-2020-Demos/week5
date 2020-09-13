@@ -47,16 +47,22 @@ function App() {
     },
   ]);
 
+  const labelsById = {};
+
+  labels.forEach((label) => {
+    labelsById[label.id] = label;
+  });
+
   return (
     <Router>
       <div className="container mt-3">
         <h1>Issues</h1>
         <Switch>
           <Route path="/" exact>
-            <Issues issues={issues} labels={labels} />
+            <Issues issues={issues} labels={labels} labelsById={labelsById} />
           </Route>
           <Route path="/issues/:id">
-            <IssueDetails issues={issues} />
+            <IssueDetails issues={issues} labelsById={labelsById} />
           </Route>
           <Route path="/new">
             <CreateIssue
