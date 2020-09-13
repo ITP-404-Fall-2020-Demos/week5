@@ -2,7 +2,7 @@ import React from "react";
 import IssueList from "./IssueList";
 import { Link } from "react-router-dom";
 
-export default function Issues({ issues, labels }) {
+export default function Issues({ issues, labelsById }) {
   return (
     <>
       <div className="text-right mb-3">
@@ -10,7 +10,7 @@ export default function Issues({ issues, labels }) {
           Create Issue
         </Link>
       </div>
-      <IssueList issues={issues} labels={labels} />
+      <IssueList issues={issues} labelsById={labelsById} />
     </>
   );
 }
