@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
-import IssueList from "./IssueList";
-import IssueForm from "./IssueForm";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Issues from "./Issues";
+import CreateIssue from "./CreateIssue";
 
 function App() {
   const labels = [
@@ -45,25 +46,24 @@ function App() {
     },
   ]);
 
-  function createIssue(title, labelId) {
-    const newIssue = {
-      id: issues.length,
-      title,
-      label: labelId,
-    };
-
-    setIssues(issues.concat(newIssue));
-  }
-
   return (
-    <div className="container mt-3">
-      <h1>Issues</h1>
-      <IssueList issues={issues} labels={labels} />
-      <div className="mt-3">
-        <h3>Create Issue</h3>
-        <IssueForm labels={labels} onSubmit={createIssue} />
+    <Router>
+      <div className="container mt-3">
+        <h1>Issues</h1>
+        <Switch>
+          <Route path="/" exact>
+            <Issues issues={issues} labels={labels} />
+          </Route>
+          <Route path="/new">
+            <CreateIssue
+              issues={issues}
+              setIssues={setIssues}
+              labels={labels}
+            />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 }
 
