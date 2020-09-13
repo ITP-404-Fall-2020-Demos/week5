@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Issues from "./Issues";
 import CreateIssue from "./CreateIssue";
+import IssueDetails from "./IssueDetails";
 
 function App() {
   const labels = [
@@ -53,6 +54,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Issues issues={issues} labels={labels} />
+          </Route>
+          <Route path="/issues/:id">
+            <IssueDetails issues={issues} />
           </Route>
           <Route path="/new">
             <CreateIssue
