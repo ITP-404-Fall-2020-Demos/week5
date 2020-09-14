@@ -77,6 +77,16 @@ function App() {
     setIssues(updatedIssues);
   }
 
+  function createIssue(title, labelId) {
+    const newIssue = {
+      id: issues.length,
+      title,
+      label: labelId,
+    };
+
+    setIssues(issues.concat(newIssue));
+  }
+
   return (
     <Router>
       <div className="container mt-3">
@@ -96,7 +106,7 @@ function App() {
           <Route path="/new">
             <CreateIssue
               issues={issues}
-              setIssues={setIssues}
+              createIssue={createIssue}
               labels={labels}
             />
           </Route>
