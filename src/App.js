@@ -53,6 +53,14 @@ function App() {
     labelsById[label.id] = label;
   });
 
+  function deleteIssue(deletedIssue) {
+    const filteredIssues = issues.filter((issue) => {
+      return issue.id !== deletedIssue.id;
+    });
+
+    setIssues(filteredIssues);
+  }
+
   return (
     <Router>
       <div className="container mt-3">
@@ -62,7 +70,11 @@ function App() {
             <Issues issues={issues} labels={labels} labelsById={labelsById} />
           </Route>
           <Route path="/issues/:id">
-            <IssueDetails issues={issues} labelsById={labelsById} />
+            <IssueDetails
+              issues={issues}
+              labelsById={labelsById}
+              deleteIssue={deleteIssue}
+            />
           </Route>
           <Route path="/new">
             <CreateIssue
