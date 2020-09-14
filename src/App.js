@@ -61,6 +61,22 @@ function App() {
     setIssues(filteredIssues);
   }
 
+  function editIssue(id, title, labelId) {
+    let updatedIssues = issues.map((issue) => {
+      if (id === issue.id) {
+        return {
+          id,
+          title,
+          label: labelId,
+        };
+      }
+
+      return issue;
+    });
+
+    setIssues(updatedIssues);
+  }
+
   return (
     <Router>
       <div className="container mt-3">
@@ -72,8 +88,9 @@ function App() {
           <Route path="/issues/:id">
             <IssueDetails
               issues={issues}
-              labelsById={labelsById}
+              labels={labels}
               deleteIssue={deleteIssue}
+              editIssue={editIssue}
             />
           </Route>
           <Route path="/new">

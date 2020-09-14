@@ -1,7 +1,13 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
+import IssueForm from "./IssueForm";
 
-export default function IssueDetails({ issues, labelsById, deleteIssue }) {
+export default function IssueDetails({
+  issues,
+  labels,
+  deleteIssue,
+  editIssue,
+}) {
   const { id } = useParams();
   const history = useHistory();
 
@@ -9,22 +15,19 @@ export default function IssueDetails({ issues, labelsById, deleteIssue }) {
     return issue.id === Number(id);
   });
 
-  const label = labelsById[issue.label];
-
   function handleDeleteButtonClick() {
     deleteIssue(issue);
     history.push("/");
   }
 
+  function handleSubmit(title, labelId) {
+    editIssue(issue.id, title, labelId);
+    history.push("/");
+  }
+
   return (
     <div>
-      <div>{issue.title}</div>
-      <span
-        className="badge badge-pill text-white"
-        style={{ backgroundColor: label.color }}
-      >
-        {label.name}
-      </span>
+      <IssueForm issue={issue} labels={labels} onSubmit={handleSubmit} />
       <div className="text-right">
         <button
           type="button"
